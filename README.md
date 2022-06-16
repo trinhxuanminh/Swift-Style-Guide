@@ -287,8 +287,51 @@ x.append(y)
 ```
 
 - Đặt tên cho các cặp phương thức đột biến / không thay đổi một cách nhất quán. Một phương thức thay đổi thường sẽ có một biến thể không thay đổi với ngữ nghĩa tương tự, nhưng nó trả về một giá trị mới thay vì cập nhật một thể hiện tại chỗ.
-    - Khi thao tác được mô tả một cách tự nhiên bởi một động từ, hãy sử dụng mệnh lệnh của động từ đó cho phương thức biến âm và áp dụng hậu tố “ed” hoặc “ing” để đặt tên cho đối từ không biến âm của nó.
-    - Khi thao tác được mô tả một cách tự nhiên bởi một danh từ , hãy sử dụng danh từ cho phương thức không thay đổi và áp dụng tiền tố “form” để đặt tên cho phương thức biến đổi của nó.
+
+##### Khi thao tác được mô tả một cách tự nhiên bởi một động từ
+
+Hãy sử dụng mệnh lệnh của động từ đó cho phương thức biến âm và áp dụng hậu tố “ed” hoặc “ing” để đặt tên cho đối từ không biến âm của nó.
+
+| Đột biến    | Nonmutating         |
+|-------------|---------------------|
+| x.sort()    | z = x.sorted()      |
+| x.append(y) | z = x.appending(y)  |
+
+_Ưu tiên đặt tên cho biến thể không bổ ngữ bằng cách sử dụng phân từ quá khứ của động từ (thường thêm “ed”)._
+
+```swift
+/// Reverses `self` in-place.
+mutating func reverse()
+
+/// Returns a reversed copy of `self`.
+func reversed() -> Self
+...
+x.reverse()
+let y = x.reversed()
+```
+
+_Khi động từ có tân ngữ trực tiếp, thêm “ed” là không đúng ngữ pháp, hãy đặt tên cho biến thể không bổ ngữ bằng cách sử dụng phân từ hiện tại của động từ, bằng cách thêm “ing”._
+
+```swift
+/// Strips all the newlines from `self`
+mutating func stripNewlines()
+
+/// Returns a copy of `self` with all the newlines stripped.
+func strippingNewlines() -> String
+...
+s.stripNewlines()
+let oneLine = t.strippingNewlines()
+```
+
+##### Khi thao tác được mô tả một cách tự nhiên bởi một danh từ
+
+Hãy sử dụng danh từ cho phương thức không thay đổi và áp dụng tiền tố “form” để đặt tên cho phương thức biến đổi của nó.
+
+| Nonmutating         | Đột biến            |
+|---------------------|---------------------|
+| x = y.union(z)      | y.formUnion(z)      |
+| j = c.successor(i)  | c.formSuccessor(&i) |
+
 - Việc sử dụng các phương thức và thuộc tính Boolean phải được đọc dưới dạng xác nhận khi việc sử dụng là không thay đổi.
 
 ```swift
